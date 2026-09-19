@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Gift Card Storage</title>
+</head>
+<body>
+  <h1>Gift Card Storage</h1>
+
+  <button id="saveCards">Save Gift Cards</button>
+  <button id="loadCards">Load Gift Cards</button>
+
+  <pre id="output"></pre>
+
+  <script>
+    document.getElementById("saveCards").addEventListener("click", async () => {
+      const cards = [
+        { brand: "Amazon Pay", value: 5000, count: 5 },
+        { brand: "Flipkart", value: 2000, count: 3 },
+        { brand: "Google Play", value: 1000, count: 2 },
+        { brand: "Paytm", value: 500, count: 4 }
+      ];
+
+      const res = await fetch("/api/store-cards", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(cards)
+      });
+      const data = await res.json();
+      alert(data.message);
+    });
+
+    document.getElementById("loadCards").addEventListener("click", async () => {
+      const res = await fetch("/api/store-cards");
+      const cards = await res.json();
+      document.getElementById("output").textContent = JSON.stringify(cards, null, 2);
+    });
+  </script>
+</body>
+</html>

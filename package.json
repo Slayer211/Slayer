@@ -1,0 +1,9 @@
+{
+  "name": "slayer",
+  "version": "1.0.0",
+  "description": "Giftcard storage app with MongoDB backend",
+  "main": "index.js",
+  "dependencies": {
+    "mongoose": "^7.6.0"
+  }
+}
